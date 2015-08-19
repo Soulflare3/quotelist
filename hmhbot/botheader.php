@@ -4,9 +4,9 @@
         
         <title><?php echo "$title"; ?></title>
 <?php
-    include 'hmhbot/meta.php';
-    include 'hmhbot/scripts.php';
-    include 'hmhbot/css.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/meta.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/scripts.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/css.php';
 ?>
     </head>
     <body>

@@ -9,7 +9,7 @@ $thisFile = basename(__FILE__);;
 $title = "Quote List";
 $quotes = 0;
 $commands = 0;
-include 'hmhbot/botheader.php';
+include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/botheader.php'; //TODO(soul): Make function for this? includeme(filename)?
 $render = "";
 
 
@@ -36,8 +36,8 @@ else
 	$db->close();
 	$render .= $prerender;
 }
-include 'hmhbot/menu.php';
+include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/menu.php';
 echo $render;
-include 'hmhbot/botfooter.php';
+include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/botfooter.php';
 ?>
 

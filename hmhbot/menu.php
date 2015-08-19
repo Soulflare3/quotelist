@@ -20,8 +20,13 @@
 					{
 					echo "<li><a href=\"#\">Commands: ".$commands."</a></li>";
 					}
+					if($quotes > 0 || $commands > 0)
+					{
+					echo "<li><a href=\"https://service.drsclan.net/hmhbot/db.php\">Download .db <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span></a></li>";
+					}
 				?>
-				<li><a href="https://service.drsclan.net/hmhbot/db.php">Download .db <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>
+				<li><a href="https://service.drsclan.net/bot.php" target="_parent">Quote list</a></li>
+				<li><a href="https://service.drsclan.net/hmhbot/about.php" target="_parent">About</a></li>
 				<li><a href="https://handmadehero.org" target="_blank">Handmade Hero</a></li>
 			</ul>
 		</div>
