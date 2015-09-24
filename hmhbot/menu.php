@@ -12,17 +12,21 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<?php
-					if($quotes > 0)
+					if($quotecount > 0)
 					{
-					echo "<li><a href=\"#\">Quotes: ".$quotes."</a></li>";
+						echo "<li><a href=\"#\">Quotes: $quotecount</a></li>";
 					}
-					if($commands > 0)
+					if($dupquotes > 0)
 					{
-					echo "<li><a href=\"#\">Commands: ".$commands."</a></li>";
+						echo "<li><a href=\"#\">Duplicates: $dupquotes</a></li>";
 					}
-					if($quotes > 0 || $commands > 0)
+					if($commandcount > 0)
 					{
-					echo "<li><a href=\"https://service.drsclan.net/hmhbot/db.php\">Download .db <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span></a></li>";
+						echo "<li><a href=\"#\">Commands: $commandcount</a></li>";
+					}
+					if($quotecount > 0 || $commandcount > 0)
+					{
+						echo '<li><a href="https://service.drsclan.net/hmhbot/db.php">Download .db <span class="glyphicon glyphicon-save" aria-hidden="true"></span></a></li>';
 					}
 				?>
 				<li><a href="https://service.drsclan.net/bot.php" target="_parent">Quote list</a></li>

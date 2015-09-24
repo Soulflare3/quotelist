@@ -1,43 +1,70 @@
 <?php
 $start = microtime(true);
 error_reporting(0);
-if (!empty($_GET["view"]))
+if (!empty($_GET['view']))
 {
-	$input = $_GET["view"];
+	$input = $_GET['view'];
 }
+$docroot = $_SERVER['DOCUMENT_ROOT'].'/hmhbot/';
 $thisFile = basename(__FILE__);;
-$title = "Quote List";
-$quotes = 0;
-$commands = 0;
-include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/botheader.php'; //TODO(soul): Make function for this? includeme(filename)?
-$render = "";
-
-
-if(strtolower($input)=="cmd")
+$title = 'Quote List';
+$quotecount=$commandcount=$dupquotes= 0;
+$render = '';
+$db = new SQLite3('/home/ChronalRobot/handmade.db');
+if(!$db)
 {
-	$render .= "<br />Here's a list of my available commands:<br /><table cellpadding=\"5\" class=\"table\"><thead><tr><th width=\"30%\">Command</th><th>Description</th></tr></thead><tbody></tbody></table>";
+	echo $db->lastErrorMsg();
 }
-else
-{
-	$db = new SQLite3('/home/ChronalRobot/handmade.db');
-	if(!$db)
+else{
+	if(!strtolower($input)=='json'||!strtolower($input)=='api')
 	{
-		echo $db->lastErrorMsg();
+		include $docroot.'botheader.php';
+		include $docroot.'menu.php';
 	}
-	$prerender .= "</section><table cellpadding=\"5\" class=\"table table-striped table-hover table-condensed\"><thead><tr><th width=\"10%\">ID</th><th width=\"80%\">Quote</th><th width=\"10%\">Timestamp</th></tr></thead><tbody>";
+	if(strtolower($input)=='cmd')
+	{
+		//TODO(soul): Finish this
+		$render .= '<br />Here\'s a list of my available commands:<br /><table cellpadding="5" class="table"><thead><tr><th width="30%">Command</th><th>Description</th></tr></thead><tbody></tbody></table>';
+	}
+	elseif(strtolower($input)=='api'||strtolower($input)=='json')
+	{
+		$quotes = array();
+		$results = $db->query('SELECT id, text, timestamp FROM quote ORDER BY timestamp ASC');
+		while ($row = $results->fetchArray())
+		{
+			$quotes[$row['id']] = array('timetamp'	=> $row['timestamp'],
+										'text'		=> $row['text']);
+		}
+		$db->close();
+		echo json_encode($quotes);
+	}
+	else
+	{
+		$prerender .= '</section><table cellpadding="5" class="table table-striped table-hover table-condensed"><thead><tr><th width="10%">ID</th><th width="80%">Quote</th><th width="10%">Timestamp</th></tr></thead><tbody>';
+		$results = $db->query('SELECT id, text, timestamp FROM quote ORDER BY timestamp ASC');
+		while ($row = $results->fetchArray())
+		{
+			$quotecount++;
+			$prerender .= '<tr><td width="10%">'. $row['id'] . '</td><td width="50%">'. $row['text'] . '</td><td width="50%">'. date('Y-m-d', $row['timestamp']) . '</td></tr>';
+		}
+		$prerender .= '</tbody></table><section class="content">';
 
-	$results = $db->query('SELECT id, text, timestamp FROM quote ORDER BY timestamp ASC');
-	while ($row = $results->fetchArray())
-	{
-		$quotes++;
-		$prerender .= "<tr><td width=\"10%\">". $row['id'] . "</td><td width=\"50%\">". $row['text'] . "</td><td width=\"50%\">". date('Y-m-d', $row['timestamp']) . "</td></tr>";
+		$results = $db->query('SELECT text, COUNT(*) occurances FROM quote GROUP BY text HAVING occurances > 1');
+		if($results != null)
+		{
+			while ($row = $results->fetchArray())
+			{
+				$dupquote++;
+			}
+		}
+		$db->close();
+		$render .= $prerender;
 	}
-	$prerender .= "</tbody></table><section class=\"content\">";
-	$db->close();
-	$render .= $prerender;
+	if(!strtolower($input)=='json'||!strtolower($input)=='api')
+	{
+		echo $render;
+		include $docroot.'botfooter.php';
+	}
 }
-include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/menu.php';
-echo $render;
-include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/botfooter.php';
 ?>
 
