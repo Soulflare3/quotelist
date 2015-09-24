@@ -31,7 +31,7 @@ else{
 		$results = $db->query('SELECT id, text, timestamp FROM quote ORDER BY timestamp ASC');
 		while ($row = $results->fetchArray())
 		{
-			$quotes[$row['id']] = array('timetamp'	=> $row['timestamp'],
+			$quotes[$row['id']] = array('timestamp'	=> $row['timestamp'],
 										'text'		=> $row['text']);
 		}
 		$db->close();
