@@ -32,7 +32,7 @@ else{
     while ($row = $results->fetchArray())
     {
       $quotes[$row['id']] = array('timestamp'	=> $row['timestamp'],
-                    'text'		=> $row['text']);
+      'text' => $row['text']);
     }
     $db->close();
     echo json_encode($quotes);
