@@ -11,7 +11,7 @@ $end = microtime(true);
 $creationtime = ($end - $start);
 if ($fmtime)
 {
-	echo "<font style=\"color:#DDDDDD\"><center><h6>Last modified " . date ("F d, Y H:i:s", $fmtime)." EST<br />Render time ". number_format($creationtime,4)."s</h6></center></font>";
+  echo "<font style=\"color:#DDDDDD\"><center><h6>Last modified " . date ("F d, Y H:i:s", $fmtime)." EST<br />Render time ". number_format($creationtime,4)."s</h6></center></font>";
 }
 ?>
 </section>

@@ -1,6 +1,6 @@
 <?php
 //http://stackoverflow.com/a/1968116
-$filename = '/home/ChronalRobot/handmade.db'; // of course find the exact filename....
+$filename = '/home/ChronalRobot/handmade.db';
 header('Pragma: public');
 header('Expires: 0');
 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');

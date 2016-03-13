@@ -1,14 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        
-        <title><?php echo "$title"; ?></title>
+  <head>
+    <title><?php echo "$title"; ?></title>
 <?php
-    include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/meta.php';
-    include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/scripts.php';
-    include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/css.php';
+  include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/meta.php';
+  include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/scripts.php';
+  include $_SERVER['DOCUMENT_ROOT'].'/hmhbot/css.php';
 ?>
-    </head>
-    <body>
-        <div class='main'>
-            <section class="content">
+  </head>
+  <body>
+    <div class='main'>
+      <section class="content">
